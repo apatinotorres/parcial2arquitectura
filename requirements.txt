@@ -1,2 +1,5 @@
-flask
-flask-bootstrap
+Flask==2.0.2
+Flask-Bootstrap==3.3.7.1
+Flask-RESTful==0.3.9
+gunicorn==20.1.0
+Jinja2==3.0.3
