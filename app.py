@@ -114,6 +114,19 @@ def add_new_user():
 
         })
 
+@app.route("/usuarios/<string:id>", methods=["DELETE"])
+def delete_user(id):
+    counter = 0
+    for usuario in users:
+        if usuario["codigo"] == id:
+            print(users[counter]["codigo"])
+            users.remove(usuario)
+            return jsonify({"mensaje":"usuario eliminado", "responsse":usuario})
+
+        counter =+1
+
+    return jsonify({"mensaje":"Usuario no encontrado, abortada accion de borrado"})
+
 
 
 
