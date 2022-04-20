@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<h1> Sistema de control de acceso vehicular - RestAPI </h1>
+<p> Base url:      </p>
+
+<h3>Vehiculos  </h3>
+
+<p> <b> /carros </b> : Metodo: GET </p>
+<p> Obtiene un json con todos los vehiculos registrados por la API   </p>
+
+<br>
+
+<p> <b> /carros/&#60;placa&#62; </b> : Metodo: PUT </p>
+<p> Modifica un vehiculo segun su placa que este registrado por la API. Ejemplo de json que se envia desde el cliente:   </p>
+
+<code>
+	{
+		"codigo": "T00056470",
+		"fecha": "18/04/22 9:55:19",
+		"placa": "qhg984"
+	}
+
+</code>
+
+
+
+<br>
+
+<p> <b> /carros </b> : Metodo: POST </p>
+<p> Crea un vehiculo nuevo segun los atributos que mande el cliente y posteriormente se registra por la API. Ejemplo de json que se envia desde el cliente:   </p>
+
+<code>
+	{
+		"codigo": "T00056470",
+		"fecha": "18/04/22 9:55:19",
+		"placa": "qhg984"
+	}
+
+</code>
+
+<br>
+
+<p> <b> /carros/&#60;placa&#62; </b> : Metodo: DELETE </p>
+<p> Elemina un vehiculo segun su placa que este registrado por la API. </p>
+
+
+<h3>Usuarios  </h3>
+<p> <b> /usuarios </b> : Metodo: GET </p>
+<p> Obtiene un json con todos los usuarios registrados por la API   </p>
+
+<br>
+
+<p> <b> /usuarios/&#60;id&#62;</b> : Metodo: PUT </p>
+<p> Modifica a un usuario segun la id suminisitrada. Ejemplo de json que debe ser enviado:</p>
+
+<code>
+	{
+		"codigo": "T00056470",
+		"nombres": "Antonio Jose Patiño Torres",
+		"rol": "estudiante",
+		"edad":"21"
+	}
+</code>
+
+<br>
+
+<p> <b> /usuarios</b> : Metodo: POST </p>
+<p> Crea un usuario nuevo segun los datos suminisitrados por el cliente. Ejemplo de json que debe ser enviado:</p>
+
+<code>
+	{
+		"codigo": "T00056470",
+		"nombres": "Antonio Jose Patiño Torres",
+		"rol": "estudiante",
+		"edad":"21"
+	}
+</code>
+
+<br>
+
+<p> <b> /usuarios/&#60;id&#62;</b> : Metodo: DELETE </p>
+<p> Elimina a un usuario segun la id suminisitrada.</p>
+
+
+
+
+
+
+{% endblock %}

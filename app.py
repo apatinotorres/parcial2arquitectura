@@ -1,6 +1,7 @@
-from flask import Flask, jsonify, request
-
+from flask import Flask, jsonify, request, render_template
+from flask_bootstrap import Bootstrap
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
 
 data = [
 
@@ -20,7 +21,7 @@ users = [
 
 @app.route("/")
 def homepage():
-    return "hola mundo!"
+    return render_template("home.html")
 
 
 
