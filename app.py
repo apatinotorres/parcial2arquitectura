@@ -81,6 +81,41 @@ def delete_carr(placa):
 def obtener_usuarios():
     return jsonify(users)
 
+@app.route("/usuarios/<string:id>", methods=["PUT"])
+def update_usuario(id):
+    counter = 0
+    for usuario in users:
+        if usuario["codigo"] == id:
+            usuario["nombres"] = request.json["nombres"]
+            usuario["edad"] = request.json["edad"]
+            usuario["rol"] = request.json["rol"]
+
+            print(users[counter]["codigo"])
+            return jsonify({"responsse":users})
+
+        counter =+1
+    return jsonify({"msg": "Usuario no encontrado"})
+
+@app.route("/usuarios", methods=["POST"])
+def add_new_user():
+    new_user = {
+            "codigo": request.json["codigo"],
+            "nombres": request.json["nombres"],
+            "rol": request.json["rol"],
+            "edad": request.json["edad"]
+
+            }
+
+    users.append(new_user)
+    return jsonify({
+
+        "mensaje": "usuario nuevo agregado correctamente, enviando catalogo actual",
+        "usuarios": users
+
+        })
+
+
+
 
 
 
