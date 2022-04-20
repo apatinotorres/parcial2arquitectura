@@ -4,10 +4,10 @@ app = Flask(__name__)
 
 data = [
 
-        {"placa": "QHG984", "fecha": "18/04/22 9:55:19", "codigo": "T00056470"},
-        {"placa": "GNG550", "fecha": "19/04/22 7:25:30", "codigo": "T00000001"},
-        {"placa": "FFF984", "fecha": "20/04/22 6:55:19", "codigo": "T00000021"},
-        {"placa": "GGG999", "fecha": "22/04/22 8:55:19", "codigo": "V00000001"}
+        {"placa": "qhg984", "fecha": "18/04/22 9:55:19", "codigo": "T00056470"},
+        {"placa": "gng550", "fecha": "19/04/22 7:25:30", "codigo": "T00000001"},
+        {"placa": "fff984", "fecha": "20/04/22 6:55:19", "codigo": "T00000021"},
+        {"placa": "ggg999", "fecha": "22/04/22 8:55:19", "codigo": "V00000001"}
 
         ]
 
@@ -29,12 +29,49 @@ def homepage():
 def obtener_carros():
     return jsonify(data)
 
-@app.route("/carros/<string:placa>", methods=["PUT"])
+@app.route("/carros/<string:placa>", methods=["PUT"]) #Hacer la prueba con insomnia
 def update_carros(placa):
-    carro_encontrado = [carro for carro in data if data["placa"] == placa]
-    if (len(carro_encontrado) > 0):
-        return jsonify({'Vehiculo': carro_encontrado[0]})
+    counter = 0
+    for carro in data:
+        if carro["placa"] == placa:
+            carro["fecha"] = request.json["fecha"]
+            carro["codigo"] = request.json["codigo"]
+
+            print(data[counter]["placa"])
+            return jsonify({"responsse":carro})
+
+        counter =+1
     return jsonify({"msg": "Vehiculo no encontrado"})
+
+@app.route("/carros", methods=["POST"])
+def add_carro():
+    new_carro = {
+            "placa": request.json["placa"],
+            "fecha": request.json["fecha"],
+            "codigo": request.json["codigo"]
+            }
+
+    data.append(new_carro)
+    return jsonify({
+
+        "mensaje": "carro nuevo agregado correctamente, enviando data actual",
+        "carros": data
+
+        })
+
+@app.route("/carros/<string:placa>", methods=["DELETE"])
+def delete_carr(placa):
+    counter = 0
+    for carro in data:
+        if carro["placa"] == placa:
+            print(data[counter]["placa"])
+            data.remove(carro)
+            return jsonify({"mensaje":"carro eliminado", "responsse":carro})
+
+        counter =+1
+
+    return jsonify({"mensaje":"Carro no encontrado, abortada accion de borrado"})
+
 
 
 
